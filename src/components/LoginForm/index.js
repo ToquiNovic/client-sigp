@@ -23,6 +23,7 @@ import { addUser } from "../../redux/features/userSlice";
 import styles from "./LoginForm.module.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import DialogRecoverPassword from "../DialogRecoverPassword";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -70,8 +71,11 @@ const LoginForm = () => {
     setOpen(false);
   };
 
-  const handlefind = () => {
-    
+  const handlefind = () => {};
+
+  const [openRecoverPassword, setOpenRecoverPassword] = useState(false);
+  const handleClouseOpenRecoverPassword = () => {
+    setOpenRecoverPassword(false);
   };
 
   return (
@@ -130,7 +134,7 @@ const LoginForm = () => {
           <Button variant="contained" type="submit">
             Iniciar sesión
           </Button>
-          
+
           <Link href="#" underline="none" onClick={handleClickOpen}>
             ¿Olvidó su nombre de usuario?
           </Link>
@@ -156,9 +160,13 @@ const LoginForm = () => {
             </DialogActions>
           </Dialog>
 
-          <Link href="#" underline="none">
+          <Button onClick={() => setOpenRecoverPassword(true)}>
             ¿Olvidó su contraseña?
-          </Link>
+          </Button>
+          <DialogRecoverPassword
+            open={openRecoverPassword}
+            handleClose={handleClouseOpenRecoverPassword}
+          ></DialogRecoverPassword>
         </form>
       </Box>
     </div>
