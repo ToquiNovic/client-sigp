@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 import userReducer from './features/userSlice';
+import tipoIDReducer from './features/TipoIDSlice';
 
 const persistConfig = {
   key: 'root',
@@ -14,6 +15,7 @@ const persistedReducer = persistReducer(persistConfig, userReducer);
 export const store = configureStore({
   reducer: {
     user: persistedReducer,
+    tipoID: tipoIDReducer,
   },
   middleware: [thunk],
 });

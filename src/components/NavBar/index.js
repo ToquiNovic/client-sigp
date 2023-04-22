@@ -25,9 +25,15 @@ const Navbar = () => {
           </Button>
         )}
 
-        {user && user.ROLL_NOMBREROL !== "ESTUDIANTE" && <Button color="inherit">Crear Inventario</Button>}
+        {user && user.ROLL_NOMBREROL !== "ESTUDIANTE" && (
+          <Button color="inherit">Crear Inventario</Button>
+        )}
+
         <Button color="inherit">Inicio</Button>
-        <Button color="inherit">Registrarse</Button>
+
+        <Button LinkComponent={Link} to="/register" color="inherit">
+          Registrarse
+        </Button>
       </Toolbar>
     </AppBar>
   );

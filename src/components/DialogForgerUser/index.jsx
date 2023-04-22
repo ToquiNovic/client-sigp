@@ -9,46 +9,46 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { recoverPassword } from "../../services/sendEmail";
+import { recoverUser } from "../../services/forgetUser";
 
-export default function DialogRecoverPassword({ open, handleClose }) {
-  const [usuario, setUsuario] = useState("");
+export default function DialogForgetUser({ open, handleClose }) {
+  const [dni, setdni] = useState("");
 
   const handleSubmit = () => {
-    console.log(usuario);
-    recoverPassword({ nickName: usuario })
+    console.log(dni);
+    recoverUser({ dni: dni })
       .then((data) => {
         handleClose();
-        setUsuario("");
-        Swal.fire("", data.msg, "success");
+        setdni("");
+        Swal.fire("Tu Usuraio es: ", data.msg, "success");
       })
       .catch((res) => {
         handleClose();
-        setUsuario("");
-        Swal.fire("", res.response.data.msg, "error");
+        setdni("");
+        Swal.fire("", res.responce.data.msg, "error");
       });
   };
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Olvido contrseña</DialogTitle>
+      <DialogTitle>Olvide mi Usuario</DialogTitle>
       <DialogContent>
-        <DialogContentText>Digita tu usuario</DialogContentText>
+        <DialogContentText>Digite su Numero de Documento.</DialogContentText>
         <TextField
           autoFocus
           margin="dense"
           id="name"
-          value={usuario}
-          onChange={(e) => setUsuario(e.target.value)}
-          placeholder="Usuario"
-          type="text"
+          value={dni}
+          onChange={(e) => setdni(e.target.value)}
+          placeholder="Numero de Documento"
+          type="number"
           fullWidth
           variant="standard"
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cerrar</Button>
-        <Button onClick={handleSubmit}>Enviar</Button>
+        <Button onClick={handleSubmit}>Buscar</Button>
       </DialogActions>
     </Dialog>
   );

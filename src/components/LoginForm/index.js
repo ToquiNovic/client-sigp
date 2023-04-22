@@ -1,16 +1,5 @@
 import { useState } from "react";
-import {
-  TextField,
-  Button,
-  Link,
-  Box,
-  InputAdornment,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@mui/material";
+import { TextField, Button, Box, InputAdornment } from "@mui/material";
 import BlindTwoToneIcon from "@mui/icons-material/BlindTwoTone";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
@@ -22,8 +11,9 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../../redux/features/userSlice";
 import styles from "./LoginForm.module.css";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import DialogRecoverPassword from "../DialogRecoverPassword";
+import DialogForgetUser from "../DialogForgerUser";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -61,21 +51,14 @@ const LoginForm = () => {
       });
   };
 
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handlefind = () => {};
-
   const [openRecoverPassword, setOpenRecoverPassword] = useState(false);
   const handleClouseOpenRecoverPassword = () => {
     setOpenRecoverPassword(false);
+  };
+
+  const [openForgetUser, setOpenForgetUser] = useState(false);
+  const handleClouseOpenForgetUser = () => {
+    setOpenForgetUser(false);
   };
 
   return (
@@ -135,30 +118,13 @@ const LoginForm = () => {
             Iniciar sesión
           </Button>
 
-          <Link href="#" underline="none" onClick={handleClickOpen}>
+          <Button onClick={() => setOpenForgetUser(true)}>
             ¿Olvidó su nombre de usuario?
-          </Link>
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Olvide mi Usuario</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Digite su Numero de Documento.
-              </DialogContentText>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                placeholder="Numero de Documento"
-                type="number"
-                fullWidth
-                variant="standard"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Cerrar</Button>
-              <Button onClick={handlefind}>Buscar</Button>
-            </DialogActions>
-          </Dialog>
+          </Button>
+          <DialogForgetUser
+            open={openForgetUser}
+            handleClose={handleClouseOpenForgetUser}
+          ></DialogForgetUser>
 
           <Button onClick={() => setOpenRecoverPassword(true)}>
             ¿Olvidó su contraseña?
@@ -167,6 +133,11 @@ const LoginForm = () => {
             open={openRecoverPassword}
             handleClose={handleClouseOpenRecoverPassword}
           ></DialogRecoverPassword>
+
+          <Button>
+            ¿No tienes cuenta?
+            <Link to="/register">Registrate</Link>
+          </Button>
         </form>
       </Box>
     </div>

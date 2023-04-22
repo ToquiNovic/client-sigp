@@ -10,5 +10,3 @@ export const createInventario = async (data, token) =>
     })
   ).data;
 
-export const forget_user = async (credentials) => 
-  (await axios.get("/api/forget_user", credentials)).data;
