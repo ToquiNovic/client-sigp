@@ -13,11 +13,10 @@ const TipoIDSelect = () => {
     getTipos().then((response) => {
       dispatch(setTipos(response.msg));
     });
-  }, []);
+  }, [dispatch]);
 
   const handleChange = (event) => {
     dispatch(setTipoSeleccionado(event.target.value));
-    console.log(event.target.value);
   };
 
   return (

@@ -42,7 +42,13 @@ const LoginForm = () => {
     event.preventDefault();
     login({ nickname: username, password })
       .then((data) => {
-        dispatch(addUser(data));
+        dispatch(
+          addUser({
+            ...data,
+            avatar:
+              "https://assets-global.website-files.com/61dc0796f359b6145bc06ea6/633d83c8cbd0cce86ce8cbe6_TransparentAvatar-WebsiteHero-thumb.png",
+          })
+        );
         Swal.fire("", "Bienvenido", "success");
         navigate("/");
       })
