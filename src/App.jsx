@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import SingUp from "./pages/signup";
 import DashboardPage from "./pages/DashboardPage";
 import HomePage from "./pages/Home";
+import Reservar from "./components/Reservar";
 
 const theme = createTheme();
 
@@ -21,7 +22,8 @@ const App = () => {
         {user && user.ROLL_NOMBREROL === "EGRESADO" && (
           <Route path="/prestamo" element={<h1>Prestamo</h1>}></Route>
         )}
-        <Route path="/solicitar" element={<HomePage/>}/>
+        <Route path="/solicitar" element={<HomePage />} />
+        <Route path="/reservar/:id" element={<Reservar />} />
       </Routes>
     </ThemeProvider>
   );

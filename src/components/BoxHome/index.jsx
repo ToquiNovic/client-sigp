@@ -20,7 +20,7 @@ const BoxHome = () => {
           </div>
         </div>
         <div className={style.customComponent} />
-        <PhysicalResource earchResults={searchResults} />
+        <PhysicalResource searchResults={searchResults} />
       </Box>
     </div>
   );

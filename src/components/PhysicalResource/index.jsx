@@ -9,15 +9,17 @@ import { useDispatch } from "react-redux";
 import { setPhysicalResource } from "../../redux/features/physicalResourceSlice";
 import { getPhysicalResource } from "../../services/physicalResource";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from '@mui/material/Tooltip';
+import Tooltip from "@mui/material/Tooltip";
 import Archive from "@mui/icons-material/Archive";
 import Ballot from "@mui/icons-material/Ballot";
 import PictureIcon from "@mui/icons-material/AspectRatio";
 import Modal from "@mui/material/Modal";
 import Skeleton from "@mui/material/Skeleton";
+import { Link, useNavigate } from "react-router-dom";
 
-const PhysicalResource = ({ searchResults })  => {
+const PhysicalResource = ({ searchResults }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [resources, setResources] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -55,64 +57,77 @@ const PhysicalResource = ({ searchResults })  => {
             </Card>
           ))
         : resources.map((resource, index) => (
-          <Tooltip title = {resource.REFI_NOMBRERESCURSOFISICO} placement="top-end" >
-        <Card key={index} className={style.cardItem} sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="190"
-              image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6H866DdmDTJ-LBjDxLCwDruIPM8QHRcUXIw&usqp=CAU"
-              alt={resource.REFI_NOMBRERESCURSOFISICO}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {resource.REFI_NOMBRERESCURSOFISICO}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Capacidad: {resource.REFI_CAPACIDADRECURSOFISICO}
-                <br />
-                Estado: {resource.REFI_ESTADORECURSOFISICO}
-                <br />
-                Tipo: {resource.TIRE_NOMBRETIPORECURSOFISICO}
-              </Typography>
-            </CardContent>
-            <Tooltip title="Reservar">
-            <IconButton aria-label="Reservar" >
-              <Archive fontSize="large" />
-            </IconButton>
-            </Tooltip>
-            <Tooltip title="Inventario">
-            <IconButton aria-label="Inventario">
-              <Ballot fontSize="large" />
-            </IconButton>
-            </Tooltip>
-            <Tooltip title="Ver imagen">
-            <IconButton
-              aria-label="Ver imagen"
-              onClick={handleOpenModal(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6H866DdmDTJ-LBjDxLCwDruIPM8QHRcUXIw&usqp=CAU"
-              )}
+            <Tooltip
+              key={index}
+              title={resource.REFI_NOMBRERESCURSOFISICO}
+              placement="top-end"
             >
-              <PictureIcon fontSize="large"/>
-            </IconButton>
-            </Tooltip>
-            <Modal
-                open={openModal}
-                onClose={handleCloseModal}
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
+              <Card
+                key={index}
+                className={style.cardItem}
+                sx={{ maxWidth: 345 }}
               >
-                <div className={style.modalContent}>
-                  <img
-                    src={selectedImage}
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="190"
+                    image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6H866DdmDTJ-LBjDxLCwDruIPM8QHRcUXIw&usqp=CAU"
                     alt={resource.REFI_NOMBRERESCURSOFISICO}
                   />
-                </div>
-              </Modal>
-          </CardActionArea>
-        </Card>
-        </Tooltip>
-      ))}
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {resource.REFI_NOMBRERESCURSOFISICO}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Capacidad: {resource.REFI_CAPACIDADRECURSOFISICO}
+                      <br />
+                      Estado: {resource.REFI_ESTADORECURSOFISICO}
+                      <br />
+                      Tipo: {resource.TIRE_NOMBRETIPORECURSOFISICO}
+                    </Typography>
+                  </CardContent>
+                  <Tooltip title="Reservar">
+                    <IconButton
+                      onClick={() =>
+                        navigate(`/reservar/${resource.REFI_IDRESCURSOFISICO}`)
+                      }
+                      aria-label="Reservar"
+                    >
+                      <Archive fontSize="large" />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Inventario">
+                    <IconButton aria-label="Inventario">
+                      <Ballot fontSize="large" />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Ver imagen">
+                    <IconButton
+                      aria-label="Ver imagen"
+                      onClick={handleOpenModal(
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6H866DdmDTJ-LBjDxLCwDruIPM8QHRcUXIw&usqp=CAU"
+                      )}
+                    >
+                      <PictureIcon fontSize="large" />
+                    </IconButton>
+                  </Tooltip>
+                  <Modal
+                    open={openModal}
+                    onClose={handleCloseModal}
+                    aria-labelledby="modal-title"
+                    aria-describedby="modal-description"
+                  >
+                    <div className={style.modalContent}>
+                      <img
+                        src={selectedImage}
+                        alt={resource.REFI_NOMBRERESCURSOFISICO}
+                      />
+                    </div>
+                  </Modal>
+                </CardActionArea>
+              </Card>
+            </Tooltip>
+          ))}
     </div>
   );
 };
