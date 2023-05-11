@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import SingUp from "./pages/signup";
 import DashboardPage from "./pages/DashboardPage";
+import HomePage from "./pages/Home";
 
 const theme = createTheme();
 
@@ -20,6 +21,7 @@ const App = () => {
         {user && user.ROLL_NOMBREROL === "EGRESADO" && (
           <Route path="/prestamo" element={<h1>Prestamo</h1>}></Route>
         )}
+        <Route path="/solicitar" element={<HomePage/>}/>
       </Routes>
     </ThemeProvider>
   );

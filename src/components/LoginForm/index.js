@@ -50,7 +50,7 @@ const LoginForm = () => {
           })
         );
         Swal.fire("", "Bienvenido", "success");
-        navigate("/");
+        navigate("/solicitar");
       })
       .catch((data) => {
         Swal.fire("Upps!", data.response.data.msg, "error");

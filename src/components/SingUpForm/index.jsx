@@ -14,6 +14,8 @@ import { singUp } from "../../services/singUp";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
+import LoadImagePerfil from "../LoadImagePerfil";
+import { useNavigate } from "react-router-dom";
 
 const SingUpForm = () => {
   const [nombre1, setNombre1] = useState("");
@@ -27,6 +29,10 @@ const SingUpForm = () => {
     (state) => state.tipoID.tipoSeleccionado
   );
 
+  const navigate = useNavigate();
+  // const [image, setImage] = useState(null);
+  // const [imageDataURL, setImageDataURL] = useState(null);
+
   const validarFormulario = () => {
     if (!nombre1 || !apellido1 || !numerodni || !correo) {
       Swal.fire(
@@ -36,7 +42,6 @@ const SingUpForm = () => {
       );
       return false;
     } else {
-      
       return true;
     }
   };
@@ -56,12 +61,19 @@ const SingUpForm = () => {
       })
         .then((data) => {
           Swal.fire("", data.msg, "success");
+          navigate("/");
         })
         .catch((res) => {
           Swal.fire("", res.response.data.msg, "error");
         });
     }
   };
+
+  // const handleImageUpload = (file, dataURL) => {
+  //   console.log('Archivo de imagen seleccionado:', file);
+  //   setImage(file);
+  //   setImageDataURL(dataURL);
+  // };
 
   return (
     <div>
@@ -125,10 +137,19 @@ const SingUpForm = () => {
               <FormControlLabel value="Otro" control={<Radio />} label="Otro" />
             </RadioGroup>
           </FormControl>
-          {/* <TextField label="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+
+          {/* <LoadImagePerfil
+            onImageUpload={handleImageUpload}
           /> */}
+          {/* <LoadImagePerfil onImageChange={handleImageUpload} /> */}
+
+          {/* {imageDataURL && (
+            <img
+              src={imageDataURL}
+              alt="Imagen de perfil"
+              style={{ width: "100px", height: "100px" }}
+            />
+          )} */}
 
           <Button variant="contained" type="submit">
             Crear Cuenta

@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 import userReducer from './features/userSlice';
 import tipoIDReducer from './features/TipoIDSlice';
+import physicalResourceReducer from './features/physicalResourceSlice';
 
 const persistConfig = {
   key: 'root',
@@ -16,6 +17,7 @@ export const store = configureStore({
   reducer: {
     user: persistedReducer,
     tipoID: tipoIDReducer,
+    physicalResource: physicalResourceReducer,
   },
   middleware: [thunk],
 });

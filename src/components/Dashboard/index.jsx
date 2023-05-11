@@ -2,10 +2,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -21,7 +19,7 @@ export default function Dashboard({ children }) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Navbar></Navbar>
+      <Navbar/>
       <Box
         component="main"
         sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
@@ -30,6 +28,7 @@ export default function Dashboard({ children }) {
       </Box>
       <Drawer
         sx={{
+          zIndex: 1200,
           width: drawerWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
@@ -38,7 +37,7 @@ export default function Dashboard({ children }) {
           },
         }}
         variant="permanent"
-        anchor="right"
+        anchor="left"
       >
         <Toolbar />
         <Divider />

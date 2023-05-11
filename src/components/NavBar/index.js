@@ -16,8 +16,6 @@ import { removeUser } from "../../redux/features/userSlice";
 import config from "../../config";
 import { useState } from "react";
 
-const drawerWidth = 240;
-
 const Navbar = () => {
   const user = useSelector((state) => state.user.user);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -35,7 +33,7 @@ const Navbar = () => {
   return (
     <AppBar
       position="fixed"
-      sx={{ width: `calc(100% - ${drawerWidth}px)`, mr: `${drawerWidth}px` }}
+      sx={{ width: '100%', zIndex: 1201 }}
     >
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
