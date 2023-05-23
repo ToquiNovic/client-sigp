@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -6,6 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
 import listPlugin from "@fullcalendar/list";
 import { useParams } from "react-router-dom";
+import { getReservas } from "../../services/physicalResource";
 
 function renderEventContent(eventInfo) {
   return (
@@ -17,13 +18,36 @@ function renderEventContent(eventInfo) {
 }
 
 export default function Reservar() {
-  const [, setCurrentEvents] = useState([]);
+  const [currentEvents, setCurrentEvents] = useState([]);
 
   const { id } = useParams();
 
-  const handleEvents = (events) => {
-    setCurrentEvents(events);
-  };
+  useEffect(() => {
+    const fetchReservas = async () => {
+      try {
+        const reservas = await getReservas(id);
+        
+
+        // const reservasArray = Array.isArray(reservas) ? reservas : [];
+  
+        setCurrentEvents(reservas.map((reserva) => {
+          return {
+            id: reserva.REFI_IDRESCURSOFISICO,
+            title: reserva.SOLI_DESCRIPCION,
+            start: reserva.SOLI_FECHAPRESTAMO,
+            end: reserva.SOLI_FECHADEVOLUCION
+          };
+        }));
+      } catch (error) {
+        console.error("No hay reservas:", error);
+      }
+    };
+  
+    fetchReservas();
+  }, [id]);
+
+  console.log("Reservas:", currentEvents);
+  
 
   return (
     <div>
@@ -51,28 +75,17 @@ export default function Reservar() {
           selectMirror
           dayMaxEvents
           weekends
-          initialEvents={[
-            {
-              id: 1,
-              title: "Sala",
-              start: "2023-05-10",
-              end: "2023-05-12",
-            },
-            {
-              id: 2,
-              title: "Sala 3",
-              start: "2023-05-10 11:00",
-              end: "2023-05-10 13:00",
-            },
-          ]}
+          events={currentEvents}
           select={(e) => {
-            console.log(e);
+            console.log(e.startStr);
           }}
           eventContent={renderEventContent}
           eventClick={(e) => {
-            console.log(e);
+            const {
+              title              
+            } = e.event;
+            console.log(title);
           }}
-          eventsSet={handleEvents}
         />
       </div>
     </div>

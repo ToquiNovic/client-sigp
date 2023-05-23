@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import SingUp from "./pages/signup";
 import DashboardPage from "./pages/DashboardPage";
 import HomePage from "./pages/Home";
-import Reservar from "./components/Reservar";
+import ReservarBox from "./pages/ReservarPage";
 
 const theme = createTheme();
 
@@ -23,7 +23,7 @@ const App = () => {
           <Route path="/prestamo" element={<h1>Prestamo</h1>}></Route>
         )}
         <Route path="/solicitar" element={<HomePage />} />
-        <Route path="/reservar/:id" element={<Reservar />} />
+        <Route path="/reservar/:id" element={<ReservarBox />} />
       </Routes>
     </ThemeProvider>
   );

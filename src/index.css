@@ -11,4 +11,33 @@ body {
   background-position: center;
   width: 100%;
   min-height: 100vh;
+  scrollbar-width: thin; 
+  scrollbar-color: #09C transparent; 
+}
+
+
+elemento::-webkit-scrollbar-track {
+  background-color: transparent; 
+}
+
+elemento::-webkit-scrollbar-thumb {
+  background-color: #09C; 
+}
+
+elemento::-webkit-scrollbar {
+  width: 10px; 
+  height: 10px; 
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #09C;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }

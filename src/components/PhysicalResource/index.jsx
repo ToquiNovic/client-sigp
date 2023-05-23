@@ -15,7 +15,7 @@ import Ballot from "@mui/icons-material/Ballot";
 import PictureIcon from "@mui/icons-material/AspectRatio";
 import Modal from "@mui/material/Modal";
 import Skeleton from "@mui/material/Skeleton";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const PhysicalResource = ({ searchResults }) => {
   const dispatch = useDispatch();
