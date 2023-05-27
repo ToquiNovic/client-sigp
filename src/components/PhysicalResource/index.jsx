@@ -120,6 +120,7 @@ const PhysicalResource = ({ searchResults }) => {
                     <div className={style.modalContent}>
                       <img
                         src={selectedImage}
+                        width='500'
                         alt={resource.REFI_NOMBRERESCURSOFISICO}
                       />
                     </div>

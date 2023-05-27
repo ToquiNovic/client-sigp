@@ -7,6 +7,8 @@ import SingUp from "./pages/signup";
 import DashboardPage from "./pages/DashboardPage";
 import HomePage from "./pages/Home";
 import ReservarBox from "./pages/ReservarPage";
+import Navbar from "./components/NavBar";
+import ElementsResourse from "./components/ElementsResourse";
 
 const theme = createTheme();
 
@@ -15,6 +17,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<SingUp />} />
@@ -22,7 +25,8 @@ const App = () => {
         {user && user.ROLL_NOMBREROL === "EGRESADO" && (
           <Route path="/prestamo" element={<h1>Prestamo</h1>}></Route>
         )}
-        <Route path="/solicitar" element={<HomePage />} />
+        <Route path="/phisical" element={<HomePage />} />
+        <Route path="/elements" element={<ElementsResourse/>} />
         <Route path="/reservar/:id" element={<ReservarBox />} />
       </Routes>
     </ThemeProvider>

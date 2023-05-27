@@ -4,6 +4,7 @@
   /* overflow-x: hidden; */
 }
 
+/*
 body {
   background-image: url("./img/Flor.jpg");
   background-size: cover;
@@ -14,6 +15,7 @@ body {
   scrollbar-width: thin; 
   scrollbar-color: #09C transparent; 
 }
+*/
 
 
 elemento::-webkit-scrollbar-track {

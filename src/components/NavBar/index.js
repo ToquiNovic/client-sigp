@@ -11,7 +11,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { removeUser } from "../../redux/features/userSlice";
 import config from "../../config";
 import { useState } from "react";
@@ -19,6 +19,9 @@ import { useState } from "react";
 const Navbar = () => {
   const user = useSelector((state) => state.user.user);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -31,10 +34,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   return (
-    <AppBar
-      position="fixed"
-      sx={{ width: '100%', zIndex: 1201 }}
-    >
+    <AppBar position="fixed" sx={{ width: "100%", zIndex: 1201 }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           SIGP
@@ -48,6 +48,17 @@ const Navbar = () => {
 
         {user && user.roles.includes(config.ROLL.ADMIN) && (
           <Button color="inherit">Crear Inventario</Button>
+        )}
+
+        {user && (
+          <Button
+          color="inherit"
+            onClick={() =>
+              navigate(pathname === "/phisical" ? "/elements" : "/phisical")
+            }
+          >
+            {pathname === "/phisical" ? "Elementos" : "Recursos Fisicos"}{" "}
+          </Button>
         )}
 
         {user && user.roles.includes(config.ROLL.ADMIN) && (
