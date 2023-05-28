@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button, Grid } from '@mui/material';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -19,7 +20,20 @@ function renderEventContent(eventInfo) {
 
 export default function Reservar() {
   const [currentEvents, setCurrentEvents] = useState([]);
-
+  
+  const renderDateFields = () => (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Button variant="contained" color="primary" style={{ marginRight: 8 }}>
+          Reservar Ahora
+        </Button>
+        <Button variant="contained" color="secondary">
+          Agregar a solicitud
+        </Button>
+      </Grid>
+    </Grid>
+  );
+  
   const { id } = useParams();
 
   useEffect(() => {
@@ -48,7 +62,6 @@ export default function Reservar() {
 
   console.log("Reservas:", currentEvents);
   
-
   return (
     <div>
       <div
@@ -88,6 +101,7 @@ export default function Reservar() {
           }}
         />
       </div>
+      {renderDateFields()}
     </div>
   );
 }

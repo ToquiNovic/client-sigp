@@ -7,8 +7,9 @@
 }
 
 .containerElements {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(13, 13, 255, 0.1);
   padding: 5rem;
+  margin-top: 40%;
   border-radius: 5px;
   width: 80%;
   display: grid;

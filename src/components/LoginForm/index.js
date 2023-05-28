@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { TextField, Button, Box, InputAdornment } from "@mui/material";
-import BlindTwoToneIcon from "@mui/icons-material/BlindTwoTone";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
@@ -14,6 +13,7 @@ import Swal from "sweetalert2";
 import { useNavigate, Link } from "react-router-dom";
 import DialogRecoverPassword from "../DialogRecoverPassword";
 import DialogForgetUser from "../DialogForgerUser";
+import logo from "../../img/Logo 1.svg";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -76,7 +76,7 @@ const LoginForm = () => {
         }}
       >
         <form onSubmit={handleSubmit} className={styles.content}>
-          <BlindTwoToneIcon sx={{ fontSize: 100 }} />
+          <img src={logo} alt="logo" />
           <TextField
             required
             label="Usuario"

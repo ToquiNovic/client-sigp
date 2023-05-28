@@ -9,11 +9,13 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Badge,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { removeUser } from "../../redux/features/userSlice";
 import config from "../../config";
+import logo from "../../img/Logo 1.svg";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -37,7 +39,7 @@ const Navbar = () => {
     <AppBar position="fixed" sx={{ width: "100%", zIndex: 1201 }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          SIGP
+          <img src={logo} alt="Logo de SIGP" />
         </Typography>
 
         {!user && (
@@ -46,13 +48,25 @@ const Navbar = () => {
           </Button>
         )}
 
-        {user && user.roles.includes(config.ROLL.ADMIN) && (
-          <Button color="inherit">Crear Inventario</Button>
+        {user && (
+          <Button LinkComponent={Link} to="/solicitud" color="inherit">
+            <Badge badgeContent={1} color="secondary">
+              <Box sx={{ mb: 0, mb2: 0 }}>
+                <Typography
+                  variant="subtitle1"
+                  component="div"
+                  sx={{ flexGrow: 1 }}
+                >
+                  Solicitud
+                </Typography>
+              </Box>
+            </Badge>
+          </Button>
         )}
 
         {user && (
           <Button
-          color="inherit"
+            color="inherit"
             onClick={() =>
               navigate(pathname === "/phisical" ? "/elements" : "/phisical")
             }

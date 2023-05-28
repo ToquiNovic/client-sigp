@@ -1,4 +1,4 @@
-import { Archive, Ballot } from "@mui/icons-material";
+import { Archive, AddBox } from "@mui/icons-material";
 import {
   Box,
   Card,
@@ -63,9 +63,9 @@ export default function CardElement({ element }) {
               <Archive fontSize="large" />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Inventario">
-            <IconButton aria-label="Inventario">
-              <Ballot fontSize="large" />
+          <Tooltip title="Agregar a Solicutud">
+            <IconButton aria-label="Solicutud">
+              <AddBox fontSize="large"/>
             </IconButton>
           </Tooltip>
           <Tooltip title="Ver imagen">
