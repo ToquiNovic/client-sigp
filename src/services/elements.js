@@ -15,3 +15,7 @@ export const getElementsName = async ({ name }) => {
     throw new Error("Error con el servidor!");
   }
 };
+
+export const createdElement = async (data) => {
+  return (await axios.post("/api/elements", data)).data;
+};

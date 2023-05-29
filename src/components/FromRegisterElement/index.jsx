@@ -1,76 +1,56 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
-import styles from "./FromRegisterElement.module.css";
 import appFirebase from "../../utils/firebase";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDowloadURL } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { useState } from "react";
+import SelectCategory from "../SelectCategory";
+import { createdElement } from "../../services/elements";
 
-const db = getFirestore(appFirebase);
 const storage = getStorage(appFirebase);
 
 const FromRegisterElements = () => {
-  let urlimDesc;
+  const [urlImage, setUrlImage] = useState("");
 
-  const saveElement = async (e) => {
-    e.preventDefault();
-    const nombre = e.target.nombre.value;
-    const brand = e.target.brand.value;
-    const category = e.target.category.value;
-    const description = e.target.description.value;
-
-    const newElement = {
-      nombre: nombre,
-      image: urlimDesc,
-      brand: brand,
-      category: category,
-      description: description,
-    };
-
-    //funcion de guardado
-    try {
-        await addDoc(collection(db, 'elements'), {
-            ...newElement,
-        })
-    } catch (error) {
-        console.log(error);
-    }
-
-    e.target.nombre.value = '';
-    e.target.image.value = '';
-    e.target.brand.value = '';
-    e.target.category.value = '';
-    e.target.description.value = '';
-    e.target.file.value = '';
+  const fileHandler = async (event) => {
+    const file = event.target.files[0];
+    const refFile = ref(storage, `images/${file.name}`);
+    await uploadBytes(refFile, file);
+    setUrlImage(await getDownloadURL(refFile));
   };
 
-  const fileHandle = async (e) => {
-    const archiveI = e.target.files[0];
-    const refArchive = ref(storage, `documentos/${archiveI.name}`)
-    await uploadBytes(refArchive, archiveI)
-    urlimDesc = await getDowloadURL(refArchive)
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const { category, ...newElement } = Object.fromEntries(
+      new window.FormData(event.target)
+    );
+    createdElement({
+      ...newElement,
+      categoryId: Number(category),
+      image: urlImage,
+    })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
-      <Box
-        className={styles.container}
-        sx={{
-          "& .MuiTextField-root": { m: 1, width: "30ch" },
-        }}
-      >
-        <Typography variant="h4" gutterBottom>
-          Agregar Elemento
-        </Typography>
-        <form onSubmit={saveElement}>
-          <TextField label="Nombre Elemento" />
-          <TextField label="Marca" />
-          <TextField label="Categoria" />
-          <TextField label="Descripcion" />
-          <TextField type="file" label="Agregar Imagen: " id="file" onChange={fileHandle}/>
-          <Button variant="contained" type="submit">
-            Crear Elemento
-          </Button>
-        </form>
-      </Box>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Nombre</label>
+        <input id="name" type="text" name="name" required />
+        <label htmlFor="brand">Marca</label>
+        <input id="brand" type="text" name="brand" required />
+        <label id="description">Descripcion</label>
+        <input id="description" type="text" name="description" required />
+        <SelectCategory />
+        {!urlImage ? (
+          <input onChange={fileHandler} type="file" name="image" required />
+        ) : (
+          <img width="300" src={urlImage} alt="" />
+        )}
+        <button type="submit">Enviar</button>
+      </form>
     </div>
   );
 };
