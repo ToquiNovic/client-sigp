@@ -23,7 +23,7 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  borderRadius: '5px',
+  borderRadius: "5px",
   p: 4,
 };
 
@@ -64,8 +64,11 @@ export default function CardElement({ element }) {
             </IconButton>
           </Tooltip>
           <Tooltip title="Agregar a Solicutud">
-            <IconButton aria-label="Solicutud">
-              <AddBox fontSize="large"/>
+            <IconButton
+              onClick={() => navigate(`/elements/${name}`)}
+              aria-label="Solicutud"
+            >
+              <AddBox fontSize="large" />
             </IconButton>
           </Tooltip>
           <Tooltip title="Ver imagen">
@@ -75,19 +78,19 @@ export default function CardElement({ element }) {
           </Tooltip>
         </CardActionArea>
         <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6H866DdmDTJ-LBjDxLCwDruIPM8QHRcUXIw&usqp=CAU"
-            alt="random"
-            style={{ width: "100%" }}
-          />
-        </Box>
-      </Modal>
+          open={open}
+          onClose={() => setOpen(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6H866DdmDTJ-LBjDxLCwDruIPM8QHRcUXIw&usqp=CAU"
+              alt="random"
+              style={{ width: "100%" }}
+            />
+          </Box>
+        </Modal>
       </Card>
     </Tooltip>
   );

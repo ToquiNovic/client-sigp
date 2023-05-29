@@ -20,6 +20,7 @@ import { useState } from "react";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user.user);
+  const amountCart = useSelector((state) => state.cart.amount);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const { pathname } = useLocation();
@@ -38,7 +39,7 @@ const Navbar = () => {
   return (
     <AppBar position="fixed" sx={{ width: "100%", zIndex: 1201 }}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" to="/" component={Link} sx={{ flexGrow: 1 }}>
           <img src={logo} alt="Logo de SIGP" />
         </Typography>
 
@@ -50,7 +51,7 @@ const Navbar = () => {
 
         {user && (
           <Button LinkComponent={Link} to="/solicitud" color="inherit">
-            <Badge badgeContent={1} color="secondary">
+            <Badge badgeContent={amountCart} color="secondary">
               <Box sx={{ mb: 0, mb2: 0 }}>
                 <Typography
                   variant="subtitle1"
@@ -68,10 +69,10 @@ const Navbar = () => {
           <Button
             color="inherit"
             onClick={() =>
-              navigate(pathname === "/phisical" ? "/elements" : "/phisical")
+              navigate(pathname === "/elements" ? "/" : "/elements")
             }
           >
-            {pathname === "/phisical" ? "Elementos" : "Recursos Fisicos"}{" "}
+            {pathname === "/elements" ? "Recursos Fisicos" : "Elementos"}
           </Button>
         )}
 

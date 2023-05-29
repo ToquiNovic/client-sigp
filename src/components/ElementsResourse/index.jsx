@@ -1,14 +1,13 @@
 import { useElements } from "../../hooks/useElements";
 import CardElement from "../CardElement";
+import Loading from "../Loading";
 import clases from "./ElementsResourse.module.css";
 
 export default function ElementsResourse() {
   const { loading, elements, error } = useElements();
 
-  console.log(error);
-
   if (loading) {
-    return <h1>Loading</h1>;
+    return <Loading />;
   }
 
   if (error) {
@@ -21,9 +20,12 @@ export default function ElementsResourse() {
         {elements.length === 0 ? (
           <h1>No hay Elementos</h1>
         ) : (
-          elements.map((element) => <CardElement key={element.id} element={element} />)
+          elements.map((element) => (
+            <CardElement key={element.id} element={element} />
+          ))
         )}
       </div>
+      )
     </div>
   );
 }

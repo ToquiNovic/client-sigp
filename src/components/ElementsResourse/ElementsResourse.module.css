@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  height: 100vh;
+  min-width: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,6 @@
 .containerElements {
   background-color: rgba(13, 13, 255, 0.1);
   padding: 5rem;
-  margin-top: 40%;
   border-radius: 5px;
   width: 80%;
   display: grid;

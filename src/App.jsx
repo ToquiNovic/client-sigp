@@ -9,6 +9,7 @@ import HomePage from "./pages/Home";
 import ReservarBox from "./pages/ReservarPage";
 import Navbar from "./components/NavBar";
 import ElementsResourse from "./components/ElementsResourse";
+import DetailsElement from "./components/DetailsElement";
 
 const theme = createTheme();
 
@@ -17,17 +18,17 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={user ? <HomePage /> : <Login />} />
         <Route path="/register" element={<SingUp />} />
         <Route path="/dashboard" element={<DashboardPage></DashboardPage>} />
         {user && user.ROLL_NOMBREROL === "EGRESADO" && (
           <Route path="/prestamo" element={<h1>Prestamo</h1>}></Route>
         )}
-        <Route path="/phisical" element={<HomePage />} />
-        <Route path="/elements" element={<ElementsResourse/>} />
+        <Route path="/elements" element={<ElementsResourse />} />
         <Route path="/reservar/:id" element={<ReservarBox />} />
+        <Route path="/elements/:name" element={<DetailsElement />} />
       </Routes>
     </ThemeProvider>
   );
