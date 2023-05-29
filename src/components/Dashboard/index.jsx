@@ -11,15 +11,33 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { styled } from '@mui/material/styles';
 import Navbar from "../NavBar";
+import { Typography } from "@mui/material";
+import FromRegisterElements from "../FromRegisterElement"
 
 const drawerWidth = 240;
+
+const Main = styled('main')(
+  ({ theme }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3)
+  }),
+);
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
 
 export default function Dashboard({ children }) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Navbar/>
+      <Navbar />
       <Box
         component="main"
         sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
@@ -42,7 +60,7 @@ export default function Dashboard({ children }) {
         <Toolbar />
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {["Solicitudes", "Mensajes", "Modificar"].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -55,7 +73,12 @@ export default function Dashboard({ children }) {
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
+          {[
+            "Crear Elemento",
+            "Crear Recurso Fisico",
+            "Inventario",
+            "Auxiliares",
+          ].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -67,6 +90,25 @@ export default function Dashboard({ children }) {
           ))}
         </List>
       </Drawer>
+      <Main>
+        <DrawerHeader />
+        <Typography paragraph>
+        <FromRegisterElements/>
+        </Typography>
+        <Typography paragraph>
+          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
+          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
+          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
+          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
+          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
+          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
+          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
+          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+          posuere sollicitudin aliquam ultrices sagittis orci a.
+        </Typography>
+      </Main>
     </Box>
   );
 }
