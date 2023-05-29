@@ -10,6 +10,7 @@ import ReservarBox from "./pages/ReservarPage";
 import Navbar from "./components/NavBar";
 import ElementsResourse from "./components/ElementsResourse";
 import DetailsElement from "./components/DetailsElement";
+import Cart from "./components/Cart";
 
 const theme = createTheme();
 
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/elements" element={<ElementsResourse />} />
         <Route path="/reservar/:id" element={<ReservarBox />} />
         <Route path="/elements/:name" element={<DetailsElement />} />
+        <Route path="/solicitud" element={<Cart />} />
       </Routes>
     </ThemeProvider>
   );
