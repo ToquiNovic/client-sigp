@@ -25,7 +25,6 @@ export default function ElementsResourse() {
           ))
         )}
       </div>
-      )
     </div>
   );
 }

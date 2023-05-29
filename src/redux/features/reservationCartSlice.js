@@ -36,9 +36,43 @@ export const reservationCartSlice = createSlice({
         reservations: [...state.reservations, { ...payload, amount: 1 }],
       };
     },
-    removeUser: (state) => ({ ...state, user: null }),
+    removeReservation: (state, { payload }) => {
+      if (state.amount > 0) {
+        if (payload.amount > 1) {
+          return {
+            ...state,
+            amount: state.amount - 1,
+            reservations: state.reservations.map((reser) =>
+              reser.id === payload.id
+                ? { ...reser, amount: reser.amount - 1 }
+                : reser
+            ),
+          };
+        }
+
+        return {
+          ...state,
+          amount: state.amount - 1,
+          reservations: state.reservations.filter(
+            (reser) => reser.id !== payload.id
+          ),
+        };
+      }
+
+      return { ...state };
+    },
+    deleteReservation: (state, { payload }) => {
+      return {
+        ...state,
+        amount: state.amount - payload.amount,
+        reservations: state.reservations.filter(
+          (reser) => reser.id !== payload.id
+        ),
+      };
+    },
   },
 });
 
-export const { addReservation, removeUser } = reservationCartSlice.actions;
+export const { addReservation, removeReservation, deleteReservation } =
+  reservationCartSlice.actions;
 export default reservationCartSlice.reducer;

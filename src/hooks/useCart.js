@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addReservation } from "../redux/features/reservationCartSlice";
+import {
+  addReservation,
+  deleteReservation,
+  removeReservation,
+} from "../redux/features/reservationCartSlice";
 
 export function useCart() {
   const reservations = useSelector((state) => state.cart.reservations);
@@ -10,7 +14,15 @@ export function useCart() {
     dispatch(addReservation(data));
   };
 
+  const removeElement = (data) => {
+    dispatch(removeReservation(data));
+  };
+
+  const deleteElement = (data) => {
+    dispatch(deleteReservation(data));
+  };
+
   useEffect(() => {}, []);
 
-  return { reservations, addElement };
+  return { reservations, addElement, removeElement, deleteElement };
 }

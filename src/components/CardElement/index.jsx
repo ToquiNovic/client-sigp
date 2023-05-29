@@ -1,4 +1,4 @@
-import { Archive, AddBox } from "@mui/icons-material";
+import { AddBox } from "@mui/icons-material";
 import {
   Box,
   Card,
@@ -31,7 +31,7 @@ export default function CardElement({ element }) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
-  const { id, name, state, category, stock } = element;
+  const { name, state, category, stock } = element;
 
   return (
     <Tooltip title={name} placement="top-end">
@@ -55,14 +55,6 @@ export default function CardElement({ element }) {
               Tipo: {category}
             </Typography>
           </CardContent>
-          <Tooltip title="Reservar">
-            <IconButton
-              onClick={() => navigate(`/reservar/${id}`)}
-              aria-label="Reservar"
-            >
-              <Archive fontSize="large" />
-            </IconButton>
-          </Tooltip>
           <Tooltip title="Agregar a Solicutud">
             <IconButton
               onClick={() => navigate(`/elements/${name}`)}
